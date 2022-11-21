@@ -9,8 +9,10 @@ export const rpcHost =
 
 export const candyMachineId = new PublicKey(
   process.env.NEXT_PUBLIC_CANDY_MACHINE_ID ||
-    "3zwFR3spiwbSSMtvVKG2bRT6ttqFoC3MHCafGP8ZrdLz"
+    "BBqWk25xQ5mXZmfjsuzK8w7Lbq4jknCSySnFRZaUn3tb"
 );
+
+export const ownerId = new PublicKey("padaSLVyzU91GkTVVHFfzLD8ec86Svnv9T1HJ2E9qKW");
 export const defaultGuardGroup =
   process.env.NEXT_PUBLIC_DEFAULT_GUARD_GROUP || undefined; // undefined means default
 
@@ -25,4 +27,5 @@ export const whitelistedWallets = [
   "232Z5QNvQ4wRyraGWFpC5i3HEbqozEWgBCV95eWASaG1",
   "D8ivzpXkG66VknRdVjEF1HjqS3T1tzcqraVR6FYaeLsV",
   "sTAKERL4U8fbn2nUte6rPVdcrz2z3fEh1adQEDrGULr",
+  "Ht5tqGiAf5tF8nRVDnpdvj7B9vNot6ijzykEDtQypxYC"
 ];

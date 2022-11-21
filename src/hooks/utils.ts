@@ -63,7 +63,8 @@ export const fetchMintLimit = (
   mx: Metaplex,
   candyMachine: CandyMachine,
   guardsInput$mintLimit,
-  rerenderer?: () => void
+  rerenderer?: () => void,
+  wallet?: PublicKey
 ): Promise<MintLimitLogics> => {
   const cacheKey = `${
     guardsInput$mintLimit.id
@@ -80,7 +81,7 @@ export const fetchMintLimit = (
           candyGuard: candyMachine.candyGuard.address,
           id: guardsInput$mintLimit.id,
           candyMachine: candyMachine.address,
-          user: mx.identity().publicKey,
+          user: wallet ? wallet : mx.identity().publicKey,
         });
       if (mintLimit.pda) {
         mintLimit.accountInfo = await mx.connection.getAccountInfo(
@@ -156,8 +157,9 @@ export const parseGuardGroup = async (
   if (guardsInput.mintLimit) {
     guardsParsed.mintLimit = { settings: guardsInput.mintLimit };
     if (mx)
-      await fetchMintLimit(mx, candyMachine, guardsInput.mintLimit)
+      await fetchMintLimit(mx, candyMachine, guardsInput.mintLimit, null, walletAddress)
         .then((mintLimit) => {
+          console.log("fetchmintlimit", mintLimit.pda.toBase58());
           guardsParsed.mintLimit = mintLimit;
         })
         .catch(console.error);

@@ -1,33 +1,38 @@
 [
   {
-    "title": "Wave 1",
-    "description": "Only whitelisted",
+    "title": "OGs",
+    "description": "Only whitelisted MerchantDAO",
     "groups": [
       {
-        "label": "waoed"
+        "label": "OGs"
       }
     ]
   },
   {
-    "title": "Wave 2",
+    "title": "Gib Allowlist",
     "description": "Pay to mint",
     "groups": [
       {
-        "label": "tknPmt",
-        "description": "You can only mint buy paying the specific token"
-      },
-      {
-        "label": "nftPmt",
-        "description": "You can only mint buy paying the specific nft"
+        "label": "WL1",
+        "description": "You can only mint if you are on gib allowlist"
       }
     ]
   },
   {
-    "title": "Wave 3",
+    "title": "Public Sale",
     "description": "Available for all",
     "groups": [
       {
-        "label": "public"
+        "label": "Public"
+      }
+    ]
+  },
+  {
+    "title": "Owners",
+    "description": "CM Owner ONLY!",
+    "groups": [
+      {
+        "label": "Owner"
       }
     ]
   }

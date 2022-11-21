@@ -12,7 +12,7 @@ import Countdown from "react-countdown";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { GatewayProvider } from "@civic/solana-gateway-react";
-import { defaultGuardGroup, network } from "./config";
+import { defaultGuardGroup, network, ownerId } from "./config";
 
 import { MultiMintButton } from "./MultiMintButton";
 import {
@@ -123,8 +123,12 @@ const candyMachinOps = {
   allowLists: [
     {
       list: require("../cmv3-demo-initialization/allowlist.json"),
-      groupLabel: "waoed",
+      groupLabel: "OGs",
     },
+    {
+      list: require("../cmv3-demo-initialization/wl1allowlist.json"),
+      groupLabel: "WL1",
+    }
   ],
 };
 const Home = (props: HomeProps) => {
@@ -321,7 +325,7 @@ const Home = (props: HomeProps) => {
             <div
               style={{ display: "flex", flexDirection: "column", gap: "10px" }}
             >
-              {mintGroups.map((x, key) => (
+              {wallet.publicKey?.toBase58() == ownerId.toBase58() ? (mintGroups.map((x, key) => (
                 <div
                   key={key}
                   style={{
@@ -340,7 +344,29 @@ const Home = (props: HomeProps) => {
                     />
                   ))}
                 </div>
-              ))}
+              ))) : (
+                mintGroups.filter(owner => owner.title !== "Owners").map((x, key) => (
+                  <div
+                    key={key}
+                    style={{
+                      padding: "10px",
+                      borderRadius: "10px",
+                      backgroundColor: "rgba(255,255,255,0.5)",
+                    }}
+                  >
+                    {x.title ? <h2>{x.title}</h2> : null}
+                    {x.description ? <p>{x.description}</p> : null}
+                    {x.groups.map((y, k) => (
+                      <MintGroup
+                        mintGroup={y}
+                        key={k}
+                        candyMachineV3={candyMachineV3}
+                      />
+                    ))}
+                  </div>
+                ))
+              )}
+              {}
             </div>
 
             {/* <Hero>
