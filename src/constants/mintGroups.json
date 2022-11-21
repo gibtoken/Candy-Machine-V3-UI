@@ -1,7 +1,7 @@
 [
   {
     "title": "OGs",
-    "description": "Only whitelisted MerchantDAO",
+    "description": "Only whitelisted MerchantDAO. 1 mint max!",
     "groups": [
       {
         "label": "OGs"
@@ -10,11 +10,11 @@
   },
   {
     "title": "Gib Allowlist",
-    "description": "Pay to mint",
+    "description": "Allowlist only",
     "groups": [
       {
         "label": "WL1",
-        "description": "You can only mint if you are on gib allowlist"
+        "description": "You can only mint if you are on gib allowlist. 2 mints MAX"
       }
     ]
   },
