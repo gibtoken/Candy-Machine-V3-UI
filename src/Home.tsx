@@ -300,6 +300,7 @@ const Home = (props: HomeProps) => {
             <a
               href="https://linktr.ee/flip4funds"
               target="_blank"
+              rel="noreferrer"
               title="https://linktr.ee/flip4funds"
             >
               <Image
@@ -329,7 +330,7 @@ const Home = (props: HomeProps) => {
         <Row>
           {wallet.publicKey?.toBase58() == ownerId.toBase58()
             ? mintGroups.map((x, key) => (
-                <Col xs={24} xl={8}>
+                <Col xs={24} xl={8} key={key} >
                   <Card
                     key={key}
                     style={{
@@ -364,7 +365,7 @@ const Home = (props: HomeProps) => {
             : mintGroups
                 .filter((owner) => owner.title !== "Owners")
                 .map((x, key) => (
-                  <Col xs={24} xl={8}>
+                  <Col xs={24} xl={8} key={key}>
                     <Card
                       key={key}
                       style={{
@@ -417,6 +418,7 @@ const Home = (props: HomeProps) => {
           <a
             href="https://solanastudio.xyz/"
             target="_blank"
+            rel="noreferrer"
             title="https://solanastudio.xyz"
           >
             <Image src={solanastudiologo} width={100} height={100} />
@@ -431,7 +433,7 @@ const Home = (props: HomeProps) => {
             Solana Studio
           </span>
 
-          <a href="https://twitter.com/TheStudioSolana" target="_blank" title="Twitter">
+          <a href="https://twitter.com/TheStudioSolana" target="_blank" rel="noreferrer" title="Twitter">
             <TwitterOutlined style={{ fontSize: "1.6em", color: "white" }} />
           </a>
         </Space>
@@ -457,17 +459,17 @@ export default Home;
 const renderGoLiveDateCounter = ({ days, hours, minutes, seconds }: any) => {
   return (
     <div>
-      <Card elevation={1}>
+      <Card >
         <h1>{days}</h1>Days
       </Card>
-      <Card elevation={1}>
+      <Card>
         <h1>{hours}</h1>
         Hours
       </Card>
-      <Card elevation={1}>
+      <Card>
         <h1>{minutes}</h1>Mins
       </Card>
-      <Card elevation={1}>
+      <Card>
         <h1>{seconds}</h1>Secs
       </Card>
     </div>
