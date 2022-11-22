@@ -15,6 +15,7 @@ import { writeFileSync } from "fs";
 (async function () {
   const cache = require("./cache.json");
   // if (cache.program)
+  
   //   return console.log("Program already found in your cache, exiting...");
 
   const allowList = require("./allowlist.json");
