@@ -146,12 +146,10 @@ export default function MintGroup({
           throwConfetti();
         })
         .catch(
-          (e) => console.error("mint error", e)
-          // setAlertState({
-          //   open: true,
-          //   message: e.message,
-          //   severity: "error",
-          // })
+          (e) => {
+            console.error("mint error", e);
+            toast.error(`Minting failed. Please try again. ${e?.message ?? ""}`);
+          }
         );
     },
     [candyMachineV3.mint, guards]
