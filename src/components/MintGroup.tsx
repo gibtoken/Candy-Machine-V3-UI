@@ -1,6 +1,6 @@
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
-import React from "react";
+import React, { useCallback } from "react";
 import Countdown from "react-countdown";
 import { CandyMachineV3, NftPaymentMintSettings } from "../hooks/types";
 import { MultiMintButton } from "../MultiMintButton";
@@ -9,6 +9,9 @@ import styled from "styled-components";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { Paper } from "@material-ui/core";
 import { GatewayProvider } from "@civic/solana-gateway-react";
+import confetti from 'canvas-confetti';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const ConnectButton = styled(WalletMultiButton)`
   border-radius: 5px !important;
@@ -56,9 +59,23 @@ export default function MintGroup({
   mintGroup: MintGroupMetadata;
   candyMachineV3: CandyMachineV3;
 }) {
+  const throwConfetti = useCallback(() => {
+    confetti({
+      particleCount: 400,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
+  }, [confetti]);
   const { connection } = useConnection();
   const wallet = useWallet();
-
+  const [itemsRemaining, setItemsRemaining] = React.useState(candyMachineV3.items.remaining ?? 0);
+  const [redeemed, setRedeemed] = React.useState(candyMachineV3.items.redeemed ?? 0);
+  useEffect(() =>{
+    setItemsRemaining(candyMachineV3.items.remaining ?? 0); 
+  }, [candyMachineV3.items.remaining]);
+  useEffect(() =>{
+    setRedeemed(candyMachineV3.items.redeemed ?? 0); 
+  }, [candyMachineV3.items.redeemed]);
   const { guards, guardStates, prices } = React.useMemo(
     () => ({
       guards:
@@ -124,6 +141,9 @@ export default function MintGroup({
         .then((items) => {
           // setMintedItems(items as any);
           console.log("minted", items);
+          toast.success(`Minted ${items.length > 1 ? items.map(x => x.name).join(' & ') : items[0].name} ! Check your wallet.`);
+          setItemsRemaining(candyMachineV3.items.remaining ?? 0);
+          throwConfetti();
         })
         .catch(
           (e) => console.error("mint error", e)
@@ -182,6 +202,22 @@ export default function MintGroup({
           {mintGroup.description}
         </p>
       ) : null}
+      {redeemed ? (<p
+          style={{
+            color: "black",
+          }}
+        >
+          {" "}
+          {redeemed} redeemed
+        </p>) : null}
+      {itemsRemaining ? (<p
+          style={{
+            color: "black",
+          }}
+        >
+          {" "}
+          {itemsRemaining} remaining
+        </p>) : null}
 
       {!guardStates.isStarted ? (
         <Countdown

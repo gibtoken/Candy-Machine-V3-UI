@@ -14,6 +14,7 @@ import {
   SolletWalletAdapter,
   SolongWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
+import { Toaster } from 'react-hot-toast';
 
 import { useMemo } from "react";
 
@@ -73,6 +74,7 @@ const Main = ({}) => {
           <WalletModalProvider>
             <Home candyMachineId={candyMachineId} />
           </WalletModalProvider>
+          <Toaster />
         </WalletProvider>
       </ConnectionProvider>
     </ThemeProvider>
