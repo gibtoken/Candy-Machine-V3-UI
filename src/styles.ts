@@ -114,7 +114,7 @@ export const Root = styled('div')`
 
   /* Cloud Objects */
 
-  .cloud {
+  .cloud1 {
     width: 350px;
     height: 350px;
     box-shadow: 0 16px 16px rgba(0, 0, 0, 0.1);

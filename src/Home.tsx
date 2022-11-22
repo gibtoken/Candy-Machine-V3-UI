@@ -15,15 +15,7 @@ import { GatewayProvider } from "@civic/solana-gateway-react";
 import { defaultGuardGroup, network, ownerId } from "./config";
 
 import { MultiMintButton } from "./MultiMintButton";
-import {
-  Heading,
-  Hero,
-  MintCount,
-  NftWrapper,
-  NftWrapper2,
-  Root,
-  StyledContainer,
-} from "./styles";
+
 import { AlertState } from "./utils";
 import NftsModal from "./NftsModal";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
@@ -37,17 +29,26 @@ import { guardToLimitUtil } from "./hooks/utils";
 import MintGroup from "./components/MintGroup";
 import mintGroups from "./constants/mintGroups.json";
 
-const Header = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-`;
+import logo from "./resources/logo.png";
+import solanastudiologo from "./resources/solanastudio.webp";
+import flip from "./resources/flip-3.jpg";
+import Image from "next/image";
+
+import { Space, Layout, Card, Col, Row, Divider, Button } from "antd";
+import { TwitterOutlined } from "@ant-design/icons";
+const { Header, Footer, Sider, Content } = Layout;
+
+// const Header = styled.div`
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+// `;
 const WalletContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: right;
-  margin: 30px;
+  margin: 10px;
   z-index: 999;
   position: relative;
 
@@ -105,16 +106,16 @@ const ConnectButton = styled(WalletMultiButton)`
   margin: 0 auto;
 `;
 
-const Card = styled(Paper)`
-  display: inline-block;
-  background-color: var(--countdown-background-color) !important;
-  margin: 5px;
-  min-width: 40px;
-  padding: 24px;
-  h1 {
-    margin: 0px;
-  }
-`;
+// const Card = styled(Paper)`
+//   display: inline-block;
+//   background-color: var(--countdown-background-color) !important;
+//   margin: 5px;
+//   min-width: 40px;
+//   padding: 24px;
+//   h1 {
+//     margin: 0px;
+//   }
+// `;
 
 export interface HomeProps {
   candyMachineId: PublicKey;
@@ -128,7 +129,7 @@ const candyMachinOps = {
     {
       list: require("../cmv3-demo-initialization/wl1allowlist.json"),
       groupLabel: "WL1",
-    }
+    },
   ],
 };
 const Home = (props: HomeProps) => {
@@ -283,78 +284,72 @@ const Home = (props: HomeProps) => {
   );
 
   return (
-    <main>
+    <main className="content">
       <>
-        <Header>
-          {/* <Link href='/'>
-            <img
-              style={{
-                filter: 'invert(1)',
-                maxWidth: '200px',
-                marginLeft: 30,
-                marginTop: 10,
-              }}
-              src='/logo.png'
-              alt='logo'
-            />
-          </Link> */}
-          <WalletContainer>
-            <Wallet>
-              {wallet ? (
-                <WalletAmount>
-                  {(balance || 0).toLocaleString()} SOL
-                  <ConnectButton />
-                </WalletAmount>
-              ) : (
-                <ConnectButton>Connect Wallet</ConnectButton>
-              )}
-            </Wallet>
-          </WalletContainer>
-        </Header>
-        <Root>
-          <div className="cloud-content">
-            {[...Array(7)].map((cloud, index) => (
-              <div key={index} className={`cloud-${index + 1} cloud-block`}>
-                <div className="cloud"></div>
-              </div>
-            ))}
-          </div>
-          <StyledContainer>
-            {/* <MintNavigation /> */}
-
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+        <br />
+        <Header style={{ margin: "10px" }}>
+          <Space>
+            {/* <Image
+              src={flip}
+              alt="FLiP"
+              className="logo"
+              width={200}
+              height={200}
+              style={{ borderRadius: "100px", minWidth: "50px" }}
+            /> */}
+            <a
+              href="https://linktr.ee/flip4funds"
+              target="_blank"
+              title="https://linktr.ee/flip4funds"
             >
-              {wallet.publicKey?.toBase58() == ownerId.toBase58() ? (mintGroups.map((x, key) => (
-                <div
-                  key={key}
-                  style={{
-                    padding: "10px",
-                    borderRadius: "10px",
-                    backgroundColor: "rgba(255,255,255,0.5)",
-                  }}
-                >
-                  {x.title ? <h2>{x.title}</h2> : null}
-                  {x.description ? <p>{x.description}</p> : null}
-                  {x.groups.map((y, k) => (
-                    <MintGroup
-                      mintGroup={y}
-                      key={k}
-                      candyMachineV3={candyMachineV3}
-                    />
-                  ))}
-                </div>
-              ))) : (
-                mintGroups.filter(owner => owner.title !== "Owners").map((x, key) => (
-                  <div
+              <Image
+                src={logo}
+                alt="FLiP"
+                className="logo"
+                width={200}
+                height={200}
+                style={{ borderRadius: "100px", minWidth: "50px" }}
+              />
+            </a>
+            <WalletContainer>
+              <Wallet>
+                {wallet ? (
+                  <WalletAmount>
+                    {(balance || 0).toLocaleString()} SOL
+                    <ConnectButton />
+                  </WalletAmount>
+                ) : (
+                  <ConnectButton>Connect Wallet</ConnectButton>
+                )}
+              </Wallet>
+            </WalletContainer>
+          </Space>
+        </Header>
+
+        <Row>
+          {wallet.publicKey?.toBase58() == ownerId.toBase58()
+            ? mintGroups.map((x, key) => (
+                <Col xs={24} xl={8}>
+                  <Card
                     key={key}
                     style={{
-                      padding: "10px",
+                      padding: "0px",
                       borderRadius: "10px",
                       backgroundColor: "rgba(255,255,255,0.5)",
+                      minWidth: 305,
+                      width: "45vmin",
+                      margin: 10,
                     }}
                   >
-                    {x.title ? <h2>{x.title}</h2> : null}
+                    {x.title ? (
+                      <h2
+                        style={{
+                          color: "black",
+                        }}
+                      >
+                        {x.title}
+                      </h2>
+                    ) : null}
                     {x.description ? <p>{x.description}</p> : null}
                     {x.groups.map((y, k) => (
                       <MintGroup
@@ -363,131 +358,83 @@ const Home = (props: HomeProps) => {
                         candyMachineV3={candyMachineV3}
                       />
                     ))}
-                  </div>
-                ))
-              )}
-              {}
-            </div>
-
-            {/* <Hero>
-              <Heading>
-                <Link href="/">
-                  <img
-                    style={{
-                      filter: "invert(1)",
-                      maxWidth: "350px",
-                    }}
-                    src="/logo.png"
-                    alt="logo"
-                  />
-                </Link>
-              </Heading>
-
-              <p>
-                6942 Rejected f00kers here to f00k shit up. 3 mints max per
-                wallet. Free. f00k f00k Mother f00kers.
-              </p>
-
-              {guardStates.isStarted && (
-                <MintCount>
-                  Total Minted : {candyMachineV3.items.redeemed}/
-                  {candyMachineV3.items.available}{" "}
-                  {(guards?.mintLimit?.mintCounter?.count ||
-                    guards?.mintLimit?.settings?.limit) && (
-                    <>
-                      ({guards?.mintLimit?.mintCounter?.count || "0"}
-                      {guards?.mintLimit?.settings?.limit && (
-                        <>/{guards?.mintLimit?.settings?.limit} </>
-                      )}
-                      by you)
-                    </>
-                  )}
-                </MintCount>
-              )}
-
-              {!guardStates.isStarted ? (
-                <Countdown
-                  date={guards.startTime}
-                  renderer={renderGoLiveDateCounter}
-                  onComplete={() => {
-                    candyMachineV3.refresh();
-                  }}
-                />
-              ) : !wallet?.publicKey ? (
-                <ConnectButton>Connect Wallet</ConnectButton>
-              ) : // ) : !guardStates.canPayFor ? (
-              //   <h1>You cannot pay for the mint</h1>
-              !guardStates.isWalletWhitelisted ? (
-                <h1>Mint is private.</h1>
-              ) : (
-                <>
-                  <>
-                    {!!candyMachineV3.items.remaining &&
-                    guardStates.hasGatekeeper &&
-                    wallet.publicKey &&
-                    wallet.signTransaction ? (
-                      <GatewayProvider
-                        wallet={{
-                          publicKey: wallet.publicKey,
-                          //@ts-ignore
-                          signTransaction: wallet.signTransaction,
-                        }}
-                        gatekeeperNetwork={guards.gatekeeperNetwork}
-                        clusterUrl={connection.rpcEndpoint}
-                        cluster={
-                          process.env.NEXT_PUBLIC_SOLANA_NETWORK || "devnet"
-                        }
-                        options={{ autoShowModal: false }}
-                      >
-                        <MintButton
-                          gatekeeperNetwork={guards.gatekeeperNetwork}
+                  </Card>
+                </Col>
+              ))
+            : mintGroups
+                .filter((owner) => owner.title !== "Owners")
+                .map((x, key) => (
+                  <Col xs={24} xl={8}>
+                    <Card
+                      key={key}
+                      style={{
+                        padding: "0px",
+                        borderRadius: "10px",
+                        backgroundColor: "rgba(255,255,255,0.5)",
+                        minWidth: 305,
+                        width: "45vmin",
+                        margin: 10,
+                        marginLeft: 20,
+                      }}
+                    >
+                      {x.title ? (
+                        <h2
+                          style={{
+                            color: "black",
+                          }}
+                        >
+                          {x.title}
+                        </h2>
+                      ) : null}
+                      {x.description ? (
+                        <p
+                          style={{
+                            color: "black",
+                          }}
+                        >
+                          {x.description}
+                        </p>
+                      ) : null}
+                      {x.groups.map((y, k) => (
+                        <MintGroup
+                          mintGroup={y}
+                          key={k}
+                          candyMachineV3={candyMachineV3}
                         />
-                      </GatewayProvider>
-                    ) : (
-                      <MintButton />
-                    )}
-                  </>
-                </>
-              )}
-            </Hero> */}
+                      ))}
+                    </Card>
+                  </Col>
+                ))}
+        </Row>
+        <br />
+        <NftsModal
+          openOnSolscan={openOnSolscan}
+          mintedItems={mintedItems || []}
+          setMintedItems={setMintedItems}
+        />
+        <br />
+        <Space style={{ margin: "10px", marginLeft: 20 }}>
+          <a
+            href="https://solanastudio.xyz/"
+            target="_blank"
+            title="https://solanastudio.xyz"
+          >
+            <Image src={solanastudiologo} width={100} height={100} />
+          </a>
+          <span
+            style={{
+              fontSize: "1.6em",
+              fontFamily: "Montserrat",
+              marginRight: "10px",
+            }}
+          >
+            Solana Studio
+          </span>
 
-            <NftsModal
-              openOnSolscan={openOnSolscan}
-              mintedItems={mintedItems || []}
-              setMintedItems={setMintedItems}
-            />
-          </StyledContainer>
-          {/* <NftWrapper>
-            <div className="marquee-wrapper">
-              <div className="marquee">
-                {[...Array(21)].map((item, index) => (
-                  <img
-                    key={index}
-                    src={`/nfts/${index + 1}.jpeg`}
-                    height="200px"
-                    width="200px"
-                    alt=""
-                  />
-                ))}
-              </div>
-            </div>
-          </NftWrapper>
-          <NftWrapper2>
-            <div className="marquee-wrapper second">
-              <div className="marquee">
-                {[...Array(21)].map((item, index) => (
-                  <img
-                    key={index}
-                    src={`/nfts/${index + 1}.jpeg`}
-                    height="200px"
-                    width="200px"
-                    alt=""
-                  />
-                ))}
-              </div>
-            </div>
-          </NftWrapper2> */}
-        </Root>
+          <a href="https://twitter.com/TheStudioSolana" target="_blank" title="Twitter">
+            <TwitterOutlined style={{ fontSize: "1.6em", color: "white" }} />
+          </a>
+        </Space>
       </>
       <Snackbar
         open={alertState.open}

@@ -35,7 +35,7 @@ export const Action = styled.button`
   :hover {
     border: none;
     outline: none !important;
-    background: #d09a69;
+    background: #bb80fe;
   }
   :not(disabled) {
     cursor: pointer;
@@ -48,11 +48,11 @@ export const Action = styled.button`
 export default function NftsModal({
   mintedItems,
   setMintedItems,
-  openOnSolscan
+  openOnSolscan,
 }: {
   mintedItems: (Nft | NftWithToken)[];
   setMintedItems: any;
-  openOnSolscan: (key: string) => void
+  openOnSolscan: (key: string) => void;
 }) {
   const handleClose = () => {
     setMintedItems([]);
@@ -108,13 +108,18 @@ export default function NftsModal({
                           label={`${trait_type}: ${value}`}
                           variant="outlined"
                           key={trait_type}
-                          style={{margin: 2}}
+                          style={{ margin: 2 }}
                         />
                       ))}
                     </CardContent>
                   </CardActionArea>
-                  <CardActions >
-                    <Action style={{width: "100%"}} onClick={() => openOnSolscan(nft.address.toString())}>View on solscan</Action>
+                  <CardActions>
+                    <Action
+                      style={{ width: "100%" }}
+                      onClick={() => openOnSolscan(nft.address.toString())}
+                    >
+                      View on solscan
+                    </Action>
                   </CardActions>
                 </Card>
               </Grid>

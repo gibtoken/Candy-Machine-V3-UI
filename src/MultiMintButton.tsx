@@ -19,13 +19,13 @@ export const CTAButton = styled(Button)`
   color: #000 !important;
   min-width: 258px !important;
   font-size: 1em !important;
-  font-family: "Patrick Hand", cursive;
+  font-family: "Montserrat", cursive;
   font-weight: bold !important;
 `;
 
 export const Minus = styled.button`
   font-size: 2em;
-  padding: 25px 35px;
+  padding: 15px 15px;
   font-weight: bold;
   line-height: 0.5px;
   color: #000;
@@ -35,14 +35,14 @@ export const Minus = styled.button`
   border: 0;
   border-radius: 5px;
   box-sizing: border-box;
-  font-family: "Patrick Hand", cursive;
+  font-family: "Montserrat", cursive;
   vertical-align: middle;
   transition: all linear 0.3s;
 
   :hover {
     border: none;
     outline: none !important;
-    background: #d09a69;
+    background: #bb80fe;
   }
   :not(disabled) {
     cursor: pointer;
@@ -65,7 +65,7 @@ export const NumericField = styled.input`
   box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 20%),
     0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%);
   box-sizing: border-box;
-  font-family: "Patrick Hand", cursive;
+  font-family: "Montserrat", cursive;
   font-weight: 500;
   line-height: 1px;
   border: none;
@@ -201,10 +201,13 @@ export const MultiMintButton = ({
     });
   }, []);
 
-  const updateMintCount = useCallback((event: any) => {
-    var value = parseInt(event.target.value) || 0;
-    setMintCount(Math.max(Math.min(value, limit), 1));
-  }, [limit]);
+  const updateMintCount = useCallback(
+    (event: any) => {
+      var value = parseInt(event.target.value) || 0;
+      setMintCount(Math.max(Math.min(value, limit), 1));
+    },
+    [limit]
+  );
 
   const disabled = useMemo(
     () =>
@@ -219,10 +222,7 @@ export const MultiMintButton = ({
   return (
     <div>
       <div>
-        <Minus
-          disabled={disabled || mintCount <= 1}
-          onClick={decrementValue}
-        >
+        <Minus disabled={disabled || mintCount <= 1} onClick={decrementValue}>
           <span style={{ marginTop: "-5px !important" }}>-</span>
         </Minus>
         <NumericField

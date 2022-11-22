@@ -21,9 +21,9 @@ const ConnectButton = styled(WalletMultiButton)`
 const Card = styled(Paper)`
   display: inline-block;
   background-color: var(--countdown-background-color) !important;
-  margin: 5px;
-  min-width: 40px;
-  padding: 24px;
+  margin: 2px;
+  min-width: 20px;
+  padding: 12px;
   h1 {
     margin: 0px;
   }
@@ -157,9 +157,31 @@ export default function MintGroup({
   );
 
   return (
-    <div style={{ borderTop: "1px solid black", paddingTop: "5px" }}>
-      {mintGroup.title ? <h3>{mintGroup.title}</h3> : null}
-      {mintGroup.description ? <p>{mintGroup.description}</p> : null}
+    <div
+      style={{
+        borderTop: "1px solid black",
+        paddingTop: "5px",
+      }}
+    >
+      {mintGroup.title ? (
+        <h3
+          style={{
+            color: "black",
+          }}
+        >
+          {mintGroup.title}
+        </h3>
+      ) : null}
+      {mintGroup.description ? (
+        <p
+          style={{
+            color: "black",
+          }}
+        >
+          {" "}
+          {mintGroup.description}
+        </p>
+      ) : null}
 
       {!guardStates.isStarted ? (
         <Countdown
