@@ -1,24 +1,5 @@
 [
   {
-    "title": "OGs",
-    "description": "Only whitelisted MerchantDAO. 1 mint max!",
-    "groups": [
-      {
-        "label": "OGs"
-      }
-    ]
-  },
-  {
-    "title": "Gib Allowlist",
-    "description": "Allowlist only",
-    "groups": [
-      {
-        "label": "WL1",
-        "description": "You can only mint if you are on gib allowlist. 2 mints MAX"
-      }
-    ]
-  },
-  {
     "title": "Public Sale",
     "description": "Available for all",
     "groups": [

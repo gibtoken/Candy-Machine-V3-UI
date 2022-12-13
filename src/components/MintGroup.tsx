@@ -178,7 +178,7 @@ export default function MintGroup({
     />
     <CrossmintPayButton
     clientId=" c2a4d5ca-43db-4dec-8102-9fc72eb3229e"
-    mintConfig={{"type":"candy-machine"}}
+    mintConfig={{"type":"candy-machine", "mintingGroup": "Public"}}
     mintTo={`${publicKey.toBase58()}`}
     />
     </>

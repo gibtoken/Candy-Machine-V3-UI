@@ -33,3 +33,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+key.json
+cmv3-demo-initialization/key.json
+cmv3-demo-initialization/flip-cache.json
+cmv3-demo-initialization/flip-config.json
+
