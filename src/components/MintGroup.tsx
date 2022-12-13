@@ -12,6 +12,7 @@ import { GatewayProvider } from "@civic/solana-gateway-react";
 import confetti from 'canvas-confetti';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
 
 const ConnectButton = styled(WalletMultiButton)`
   border-radius: 5px !important;
@@ -159,7 +160,10 @@ export default function MintGroup({
     gatekeeperNetwork,
   }: {
     gatekeeperNetwork?: PublicKey;
-  }) => (
+  }) => {
+    const { publicKey } = useWallet();
+    return (
+    <>
     <MultiMintButton
       candyMachine={candyMachineV3.candyMachine}
       gatekeeperNetwork={gatekeeperNetwork}
@@ -172,7 +176,13 @@ export default function MintGroup({
       onMint={startMint}
       prices={prices}
     />
-  );
+    <CrossmintPayButton
+    clientId=" c2a4d5ca-43db-4dec-8102-9fc72eb3229e"
+    mintConfig={{"type":"candy-machine"}}
+    mintTo={`${publicKey.toBase58()}`}
+    />
+    </>
+  )};
 
   return (
     <div
