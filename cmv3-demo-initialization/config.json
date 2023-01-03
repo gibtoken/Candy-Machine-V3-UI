@@ -1,14 +1,41 @@
 {
-  "number": 300,
-  "symbol": "F00K",
-  "sellerFeeBasisPoints": 500,
+  "number": 4201,
+  "symbol": "FP",
+  "sellerFeeBasisPoints": 700,
   "isMutable": true,
   "isSequential": false,
   "creators": [
     {
-      "address": "5PCFZP3pNXxYwWrr84qxm9UMpbmVq7Mi8PM5QKBeQxKQ",
+      "address": "D2WSRKaGWmEsQg7JpG1vAbNEEP3wQ1ihP5nva9gnZwaA",
       "share": 100
     }
   ],
-  "uploadMethod": "bundlr"
+  "uploadMethod": "bundlr",
+  "awsConfig": null,
+  "nftStorageAuthToken": null,
+  "shdwStorageAccount": null,
+  "pinataConfig": null,
+  "hiddenSettings": null,
+  "guards": {
+    "default": {
+      "botTax": {
+        "value": 0.01,
+        "lastInstruction": true
+      }
+    },
+    "groups": [
+      {
+        "label": "Public",
+        "guards": {
+          "startDate": {
+            "date": "2022-11-22 21:00:00 +0000"
+          },
+          "solPayment": {
+            "value": 0.69,
+            "destination": "padaSLVyzU91GkTVVHFfzLD8ec86Svnv9T1HJ2E9qKW"
+          }
+        }
+      }
+    ]
+  }
 }

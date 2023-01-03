@@ -13,6 +13,8 @@ import confetti from 'canvas-confetti';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { CrossmintPayButton } from "@crossmint/client-sdk-react-ui";
+import bonk from '../../public/bonk.png'
+import Image from 'next/image'
 
 const ConnectButton = styled(WalletMultiButton)`
   border-radius: 5px !important;
@@ -158,8 +160,10 @@ export default function MintGroup({
 
   const MintButton = ({
     gatekeeperNetwork,
+    label,
   }: {
     gatekeeperNetwork?: PublicKey;
+    label?: string;
   }) => {
     const { publicKey } = useWallet();
     return (
@@ -178,7 +182,7 @@ export default function MintGroup({
     />
     <CrossmintPayButton
     clientId=" c2a4d5ca-43db-4dec-8102-9fc72eb3229e"
-    mintConfig={{"type":"candy-machine", "mintingGroup": "Public"}}
+    mintConfig={{"type":"candy-machine", "mintingGroup": `${label ? label: 'Public'}`}}
     mintTo={`${publicKey.toBase58()}`}
     />
     </>
@@ -191,6 +195,7 @@ export default function MintGroup({
         paddingTop: "5px",
       }}
     >
+      {mintGroup.label === 'Bonk' ? (<Image src={bonk} alt='bonk' />) : null}
       {mintGroup.title ? (
         <h3
           style={{
@@ -262,7 +267,7 @@ export default function MintGroup({
                 <MintButton gatekeeperNetwork={guards.gatekeeperNetwork} />
               </GatewayProvider>
             ) : (
-              <MintButton />
+              <MintButton label={mintGroup.label}/>
             )}
           </>
         </>

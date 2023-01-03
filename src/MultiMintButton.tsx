@@ -158,7 +158,7 @@ export const MultiMintButton = ({
   }, [mintCount, prices]);
   const totalTokenCostsString = useMemo(() => {
     return totalTokenCosts.reduce(
-      (text, price) => `${text} + ${price.price} ${price.label}`,
+      (text, price) => `${text} + ${price.price} $BONK ${price.label}`,
       ""
     );
   }, [totalTokenCosts]);

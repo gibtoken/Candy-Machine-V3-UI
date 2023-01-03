@@ -1,5 +1,14 @@
 [
   {
+    "title": "$BONK Sale",
+    "description": "Mint in $BONK",
+    "groups": [
+      {
+        "label": "Bonk"
+      }
+    ]
+  },
+  {
     "title": "Public Sale",
     "description": "Available for all",
     "groups": [
